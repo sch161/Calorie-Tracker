@@ -4,10 +4,48 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calorie Tracker 로그인</title>
-    <style></style>
+    <style>
+      #All {
+        display: grid;
+        place-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .container {
+        display: inline-block;
+      }
+      img {
+        width: 100px;
+        height: 100px;
+        display: block;
+      }
+      h3 {
+        margin: 0;
+        padding-top: 20px;
+        transform: translateX(-7);
+      }
+      #id {
+        display: inline-block;
+      }
+    </style>
   </head>
   <body>
-    <img src="/images/logo.png" alt="로고사진" />
-    <h2>칼로리 트래커</h2>
+    <div id="All">
+      <div class="container">
+        <img src="/images/logo.png" alt="로고사진" />
+        <h3>칼로리 트래커</h3>
+      </div>
+      <div id="id">
+        <label for="login_id">로그인</label><br />
+        <input type="text" name="login_id" id="login_id" />
+      </div>
+      <div id="pw">
+        <label for="login_pw">비밀번호</label><br />
+        <input type="text" name="login_pw" id="login_pw" />
+      </div>
+      <button id="loginbtn">로그인</button>
+      <p>계정이 없으신가요?</p>
+      <a href="signin.html">회원가입</a>
+    </div>
   </body>
 </html>
