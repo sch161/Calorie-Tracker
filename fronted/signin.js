@@ -1,4 +1,5 @@
 import { supabase } from './main.js';
+import { getRecommendedKcal } from './calorieTable.js';
 
 const customCalorieBox = document.querySelector('.custom-calorie'); // 목표 - 직접설정
 
@@ -60,6 +61,9 @@ document.getElementById('signupbtn').addEventListener('click', async () => {
         return;
     }
 
+    // 하루 kcal 권장량 계산
+    const finalKcal = goal === 0 ? targetKcal : getRecommendedKcal(age, gender, goalInput.value);
+
     // users 테이블에 프로필 정보 저장
     const { error: profileError } = await supabase.from('users').insert({
         user_id: data.user.id,
@@ -67,7 +71,7 @@ document.getElementById('signupbtn').addEventListener('click', async () => {
         age: age,
         gender: gender,
         goal: goal,
-        target_kcal: goal === 0 ? targetKcal : null, // 직접설정일 때만 저장 (아니면 null)
+        target_kcal: finalKcal,
     });
 
     // 저장 실패 시
