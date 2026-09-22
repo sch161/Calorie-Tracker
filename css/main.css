@@ -1,0 +1,338 @@
+/* nav */
+.nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  padding: 0 32px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  /* background: var(--primary-500);
+  border-radius: var(--radius-md); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.brand-logo img {
+  width: 18px;
+  height: 18px;
+}
+
+.brand-name {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.nav-items {
+  display: flex;
+  gap: 32px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+}
+.nav-items a.active,
+.nav-items a:hover {
+  color: var(--primary-500);
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 14px;
+  background: var(--primary-100);
+  color: var(--primary-600);
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* content */
+.content {
+  background: #fff;
+  padding: 32px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.title-row .date {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.title-row .title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.btn-outline {
+  padding: 8px 14px;
+  background: #fff;
+  border: 1px solid var(--primary-500);
+  border-radius: var(--radius-md);
+  color: var(--primary-500);
+  font-size: 12px;
+  font-weight: 500;
+}
+.btn-outline:hover {
+  background: var(--primary-050);
+}
+
+/* grid */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 20px;
+  align-items: start;
+}
+.left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+}
+
+/* calorie card */
+.calorie-card {
+  padding: 28px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.progress-ring {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0; /* 크기 고정 */
+}
+.progress-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  /* -90도로 회전 */
+}
+.progress-ring circle {
+  fill: none;
+  stroke-width: 8;
+  stroke: var(--border-subtle);
+}
+
+.ring-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+.ring-text .num {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+}
+.ring-text .sub {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.cal-info {
+  display: flex;
+  flex-direction: column;
+}
+.cal-info .label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.cal-info .big-number {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  margin-top: 4px;
+  color: var(--primary-500);
+}
+.cal-info .big-number .num {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 36px;
+  letter-spacing: -0.54px;
+}
+.cal-info .big-number .unit {
+  font-weight: 700;
+  font-size: 22px;
+}
+.cal-info .goal-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+.cal-info .goal {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.btn-edit {
+  display: inline-flex;
+}
+.btn-edit img {
+  width: 16px;
+  height: 16px;
+}
+
+/* menu card */
+.menu-card {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.card-title {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.menu-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 32px 24px;
+}
+.menu-empty .icon {
+  width: 40px;
+  height: 40px;
+}
+.menu-empty .msg-title {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+.menu-empty .msg-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.btn-primary {
+  padding: 10px 20px;
+  background: var(--primary-500);
+  color: #fff;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 500;
+}
+.btn-primary:hover {
+  background: var(--primary-600);
+}
+
+/* bmi card */
+.bmi-card {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bmi-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+}
+.bmi-empty .icon-wrap {
+  height: 56px;
+  padding: 0 16px;
+  background: var(--primary-050);
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+}
+.bmi-empty .icon-wrap img {
+  width: 24px;
+  height: 56px;
+}
+.bmi-empty .msg-title {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+.bmi-empty .msg-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.bmi-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.bmi-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.bmi-bar span {
+  display: block;
+  height: 100%;
+}
+.bmi-bar span:nth-child(1) {
+  flex: 3;
+  background: var(--bmi-1);
+}
+.bmi-bar span:nth-child(2) {
+  flex: 4;
+  background: var(--bmi-2);
+}
+.bmi-bar span:nth-child(3) {
+  flex: 2;
+  background: var(--bmi-3);
+}
+.bmi-bar span:nth-child(4) {
+  flex: 5;
+  background: var(--bmi-4);
+}
+.bmi-bar span:nth-child(5) {
+  flex: 5;
+  background: var(--bmi-5);
+}
+
+.bmi-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.btn-calc {
+  padding: 12px 24px;
+  background: var(--primary-500);
+  color: #fff;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 500;
+}
+.btn-calc:hover {
+  background: var(--primary-600);
+}

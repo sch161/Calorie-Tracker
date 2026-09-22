@@ -1,0 +1,50 @@
+:root {
+  --bg-base: #f5f3ee;
+  --bg-surface: #fff;
+  --primary-050: #f0f6f1;
+  --primary-100: #e1ede4;
+  --primary-500: #5a8b62;
+  --primary-600: #4a7a52;
+  --text-primary: #1f2a25;
+  --text-secondary: #5c6963;
+  --text-muted: #98a199;
+  --border-subtle: #e5e7e3;
+
+  --bmi-1: #8fb88f;
+  --bmi-2: #5a8b62;
+  --bmi-3: #e8c267;
+  --bmi-4: #e29b4b;
+  --bmi-5: #d66d5a;
+
+  --radius-md: 10px;
+  --radius-xl: 20px;
+  --radius-pill: 999px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Noto Sans KR", sans-serif;
+  color: var(--text-primary);
+  background: var(--bg-base);
+}
+
+p,
+h1 {
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+button {
+  border: none;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+}
