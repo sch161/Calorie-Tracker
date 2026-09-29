@@ -1,14 +1,96 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>칼로리 트래커</title>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+  <body>
+    <nav class="nav-header">
+      <div class="brand">
+        <div class="brand-logo">
+          <img src="../images/logo.png" alt="로고" />
+        </div>
+        <p class="brand-name">칼로리 트래커</p>
+      </div>
+      <div class="nav-items">
+        <a href="#" class="active">홈</a>
+        <a href="#">통계</a>
+        <a href="#">BMI</a>
+      </div>
+      <div class="avatar">홍길동</div>
+    </nav>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>메인 화면</title>
-</head>
+    <main class="content">
+      <div class="title-row">
+        <div>
+          <p class="date">2026년 8월 20일 목요일</p>
+          <h1 class="title">오늘의 식단</h1>
+        </div>
+        <button class="btn-outline">+ 메뉴 추가</button>
+      </div>
 
-<body>
-  <h1>메인 화면</h1>
-</body>
+      <div class="main-grid">
+        <div class="left-col">
+          <section class="card calorie-card">
+            <div class="progress-ring">
+              <svg viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="52" />
+              </svg>
+              <div class="ring-text">
+                <p class="num">0</p>
+                <p class="sub">/ 2,200 kcal</p>
+              </div>
+            </div>
+            <div class="cal-info">
+              <p class="label">오늘 남은 칼로리</p>
+              <div class="big-number">
+                <span class="num">2,200</span>
+                <span class="unit">kcal</span>
+              </div>
+              <div class="goal-row">
+                <span class="goal">유지 목표 · 2,200 kcal</span>
+                <button class="btn-edit" aria-label="목표 수정">
+                  <img src="../images/edit_purpose.png" alt="" />
+                </button>
+              </div>
+            </div>
+          </section>
 
+          <section class="card menu-card">
+            <p class="card-title">오늘 먹은 메뉴</p>
+            <div class="menu-empty">
+              <img class="icon" src="../images/Bowl.png" alt="빈 그릇" />
+              <p class="msg-title">아직 기록된 메뉴가 없어요</p>
+              <p class="msg-sub">먹은 메뉴를 추가해 오늘 식단을 기록해보세요</p>
+              <button class="btn-primary">+ 메뉴 추가</button>
+            </div>
+          </section>
+        </div>
+
+        <section class="card bmi-card">
+          <p class="card-title">내 BMI</p>
+          <div class="bmi-empty">
+            <div class="icon-wrap">
+              <img src="../images/Calculator.png" alt="계산기" />
+            </div>
+            <p class="msg-title">아직 계산하지 않았어요</p>
+            <p class="msg-sub">키와 몸무게로 체질량 지수를 확인해요</p>
+          </div>
+          <div class="bmi-bar-wrap">
+            <div class="bmi-bar">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="bmi-labels">
+              <span>18.5</span><span>23</span><span>25</span><span>30</span
+              ><span>35+</span>
+            </div>
+          </div>
+          <button class="btn-calc">계산하기</button>
+        </section>
+      </div>
+    </main>
+  </body>
 </html>
