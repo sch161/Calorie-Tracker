@@ -78,6 +78,20 @@
 
     // 목표 수정 버튼 눌렀을 때 goalEdit 함수 실행
     document.querySelector('.btn-edit').addEventListener('click', goalEdit);
+
+    // 오늘 날짜 반영
+    const today = new Date();
+    const day = () => {
+      if (today.getDay() === 0) return '일';
+      else if (today.getDay() === 1) return '월';
+      else if (today.getDay() === 2) return '화';
+      else if (today.getDay() === 3) return '수';
+      else if (today.getDay() === 4) return '목';
+      else if (today.getDay() === 5) return '금';
+      else return '토';
+    }
+    const todayString = `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일 ${day()}요일`;
+    document.querySelector('.date').textContent = todayString;
   </script>
 
   <nav class="nav-header">
@@ -98,7 +112,7 @@
   <main class="content">
     <div class="title-row">
       <div>
-        <p class="date">2026년 8월 20일 목요일</p>
+        <p class="date"></p>
         <h1 class="title">오늘의 식단</h1>
       </div>
       <button class="btn-outline">+ 메뉴 추가</button>
