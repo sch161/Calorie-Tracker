@@ -11,89 +11,6 @@
 
 <body>
 
-  <script type="module">
-    import { supabase } from './main.js';
-
-    // 초기 변수
-    let user = null;
-    let profile = null;
-
-    async function init() {
-      // 로그인 확인
-      const { data: { user: loggedInUser } } = await supabase.auth.getUser();
-      user = loggedInUser;
-
-      if (!user) {
-        window.location.href = './login.html';
-        return; // 로그인 안 된 사용자면 로그인 페이지로 넘어가고 함수 종료
-      }
-
-      // users 테이블에서 프로필 가져오기
-      const { data, error } = await supabase
-        .from('users')
-        .select('name, goal, target_kcal')
-        .eq('user_id', user.id)
-        .single();
-      profile = data;
-
-      // 에러 처리
-      if (error) {
-        console.error('프로필 조회 실패:', error.message);
-        return;
-      }
-
-      // 사용자 이름 불러오기
-      document.querySelector('.avatar').textContent = profile.name;
-
-      // 사용자 목표 kcal 표시
-      document.querySelector('.sub').textContent = `${profile.target_kcal.toLocaleString()} kcal`;
-      document.querySelector('.goal').textContent = `유지 목표 · ${profile.target_kcal.toLocaleString()} kcal`;
-    }
-
-    init();
-
-    // kcal 목표 변경 함수
-    const goalEdit = async () => {
-      const newKcal = prompt('새 목표 칼로리를 입력하세요 (kcal)', profile.target_kcal);
-
-      // 값이 없거나, 숫자가 아니면 그냥 종료
-      if (!newKcal || isNaN(newKcal)) return;
-
-      // DB에 새로운 값 수정
-      const { error: updateError } = await supabase
-        .from('users')
-        .update({ target_kcal: parseInt(newKcal) })
-        .eq('user_id', user.id);
-
-      // if 에러 나면 경고창
-      if (updateError) {
-        alert('수정 실패: ' + updateError.message);
-        return;
-      }
-
-      // 새로고침해서 변경된 값 반영
-      location.reload();
-
-    }
-
-    // 목표 수정 버튼 눌렀을 때 goalEdit 함수 실행
-    document.querySelector('.btn-edit').addEventListener('click', goalEdit);
-
-    // 오늘 날짜 반영
-    const today = new Date();
-    const day = () => {
-      if (today.getDay() === 0) return '일';
-      else if (today.getDay() === 1) return '월';
-      else if (today.getDay() === 2) return '화';
-      else if (today.getDay() === 3) return '수';
-      else if (today.getDay() === 4) return '목';
-      else if (today.getDay() === 5) return '금';
-      else return '토';
-    }
-    const todayString = `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일 ${day()}요일`;
-    document.querySelector('.date').textContent = todayString;
-  </script>
-
   <nav class="nav-header">
     <div class="brand">
       <div class="brand-logo">
@@ -127,7 +44,7 @@
             </svg>
             <div class="ring-text">
               <p class="num">0</p>
-              <p class="sub"></p>
+              <p class="sub">/ 0 kcal</p>
             </div>
           </div>
           <div class="cal-info">
@@ -177,6 +94,7 @@
       </section>
     </div>
   </main>
+  <script type="module" src="./main1.js"></script>
 </body>
 
 </html>
