@@ -23,7 +23,11 @@
       <a href="#">통계</a>
       <a href="#">BMI</a>
     </div>
-    <div class="avatar"></div>
+    <div>
+      <div class="avatar"></div>
+    <button onClick="Logout()" id="btn-logout">로그아웃</button>
+    </div>
+
   </nav>
 
   <main class="content">
@@ -43,8 +47,8 @@
               <circle cx="60" cy="60" r="52" />
             </svg>
             <div class="ring-text">
-              <p class="num">0</p>
-              <p class="sub">/ 0 kcal</p>
+              <p class="num"></p>
+              <p class="sub">/ kcal</p>
             </div>
           </div>
           <div class="cal-info">
@@ -68,8 +72,8 @@
             <img class="icon" src="../images/Bowl.png" alt="빈 그릇" />
             <p class="msg-title">아직 기록된 메뉴가 없어요</p>
             <p class="msg-sub">먹은 메뉴를 추가해 오늘 식단을 기록해보세요</p>
-            <button class="btn-primary">+ 메뉴 추가</button>
           </div>
+          <button class="btn-primary">+ 메뉴 추가</button>
         </section>
       </div>
 
