@@ -28,6 +28,9 @@ async function init() {
         console.error('프로필 조회 실패:', error.message);
         return;
     }
+    function Logout() {
+        
+    }
 
     // 사용자 이름 불러오기
     document.querySelector('.avatar').textContent = profile.name;
@@ -280,7 +283,7 @@ async function loadTodayLogs() {
     const remaining = profile.target_kcal - totalEaten;
 
     // 남은 칼로리 갱신
-    document.querySelector('.ring-text .num').textContent = remaining.toLocaleString();
+    document.querySelector('.ring-text .num').textContent = totalEaten.toLocaleString();
     document.querySelector('.big-number .num').textContent = remaining.toLocaleString();
 
     if (logs.length === 0) {
@@ -329,6 +332,6 @@ async function deleteFoodLog(logId) {
 }
 
 // 메뉴 추가 버튼 연결
-document.querySelectorAll('.btn-outline, .menu-empty .btn-primary').forEach((btn) => {
+document.querySelectorAll('.btn-outline, .menu-card > .btn-primary').forEach((btn) => {
     btn.addEventListener('click', openFoodModal);
 });
