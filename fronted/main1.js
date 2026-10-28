@@ -4,6 +4,15 @@ import { FOOD_API_KEY } from './config.js';
 // 초기 변수
 let user = null;
 let profile = null;
+const RING_CIRCUMFERENCE = 2 * Math.PI * 52; // 원 둘레 (반지름 52)
+
+// 식사 종류 → 한글 배지 매핑
+const mealLabelMap = {
+    breakfast: { text: '아침', className: 'meal-badge--breakfast' },
+    lunch: { text: '점심', className: 'meal-badge--lunch' },
+    dinner: { text: '저녁', className: 'meal-badge--dinner' },
+    snack: { text: '간식', className: 'meal-badge--snack' },
+};
 
 async function init() {
     // 로그인 확인
@@ -28,9 +37,6 @@ async function init() {
         console.error('프로필 조회 실패:', error.message);
         return;
     }
-    function Logout() {
-        
-    }
 
     // 사용자 이름 불러오기
     document.querySelector('.avatar').textContent = profile.name;
@@ -43,6 +49,13 @@ async function init() {
 }
 
 init();
+
+// 로그아웃 버튼
+document.getElementById('btn-logout').addEventListener('click', async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) { alert('로그아웃 실패: ' + error.message); return; }
+    window.location.href = './login.html';
+});
 
 // kcal 목표 변경 함수
 const goalEdit = async () => {
@@ -244,12 +257,12 @@ async function addFoodLog(foodName, per100g, grams, mealType) {
 
     // 실제 섭취 칼로리 계산 후 기록 저장
     const actualKcal = Math.round(per100g * (grams / 100));
-    const today = new Date().toISOString().split('T')[0];
+    const todayDate = new Date().toISOString().split('T')[0];
 
     const { error: logError } = await supabase.from('food_logs').insert({
         user_id: user.id,
         food_id: foodId,
-        log_date: today,
+        log_date: todayDate,
         meal_type: mealType,
         quantity: grams,
         kcal: actualKcal,
@@ -257,15 +270,6 @@ async function addFoodLog(foodName, per100g, grams, mealType) {
 
     if (logError) alert('기록 저장 실패: ' + logError.message);
 }
-
-// 오늘 먹은 메뉴 불러와서 화면에 그리기
-// 식사 종류 → 한글 배지 매핑
-const mealLabelMap = {
-    breakfast: { text: '아침', className: 'meal-badge--breakfast' },
-    lunch: { text: '점심', className: 'meal-badge--lunch' },
-    dinner: { text: '저녁', className: 'meal-badge--dinner' },
-    snack: { text: '간식', className: 'meal-badge--snack' },
-};
 
 // 오늘 먹은 메뉴 불러와서 화면에 그리기
 async function loadTodayLogs() {
@@ -282,21 +286,31 @@ async function loadTodayLogs() {
     const totalEaten = logs.reduce((sum, log) => sum + log.kcal, 0);
     const remaining = profile.target_kcal - totalEaten;
 
-    // 남은 칼로리 갱신
-    document.querySelector('.ring-text .num').textContent = totalEaten.toLocaleString();
-    document.querySelector('.big-number .num').textContent = remaining.toLocaleString();
+    // 칼로리 숫자 갱신
+    document.querySelector('.ring-text .num').textContent = totalEaten.toLocaleString();   // 원 안: 먹은 칼로리
+    document.querySelector('.big-number .num').textContent = remaining.toLocaleString();   // 큰 숫자: 남은 칼로리
+
+    // 칼로리 바(원) 채우기
+    const ratio = profile.target_kcal > 0 ? Math.min(totalEaten / profile.target_kcal, 1) : 0;
+    const progressCircle = document.getElementById('progressCircle');
+    progressCircle.style.strokeDasharray = RING_CIRCUMFERENCE;
+    progressCircle.style.strokeDashoffset = RING_CIRCUMFERENCE * (1 - ratio);
+    progressCircle.style.stroke = totalEaten > profile.target_kcal ? '#c0392b' : '#6b8e5a'; // 초과하면 빨간색
 
     if (logs.length === 0) {
+        // 빈 상태 표시
         menuCard.querySelector('.menu-empty').style.display = 'flex';
         const list = menuCard.querySelector('.menu-list');
         if (list) list.remove();
     } else {
+        // 기록 리스트 표시
         menuCard.querySelector('.menu-empty').style.display = 'none';
         let list = menuCard.querySelector('.menu-list');
         if (!list) {
             list = document.createElement('div');
             list.className = 'menu-list';
-            menuCard.appendChild(list);
+            // 목록이 "+ 메뉴 추가" 버튼 위에 오도록 버튼 앞에 삽입
+            menuCard.insertBefore(list, menuCard.querySelector('.btn-primary'));
         }
 
         list.innerHTML = logs.map((log) => {

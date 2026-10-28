@@ -55,9 +55,8 @@
   border-radius: var(--radius-pill);
   font-size: 12px;
   font-weight: 500;
-  
 }
-#btn-logout{
+#btn-logout {
   margin-left: 16px;
 }
 
@@ -214,10 +213,11 @@
   gap: 12px;
   min-height: 320px;
 }
-.menu-card > .btn-primary {   /* ← 블록 전체 추가 */
+.menu-card > .btn-primary {
+  /* ← 블록 전체 추가 */
   margin-top: auto;
   align-self: center;
-  order:10;
+  order: 10;
 }
 .card-title {
   font-size: 16px;
@@ -402,4 +402,16 @@
 
 .menu-item .delete-btn:hover {
   color: #c0392b;
+}
+
+.progressCircle {
+  fill: none;
+  stroke: #6b8e5a;
+  stroke-width: 10;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 60px 60px;
+  stroke-dasharray: 326.73;
+  stroke-dashoffset: 326.73;
+  transition: stroke-dashoffset 0.6s ease;
 }

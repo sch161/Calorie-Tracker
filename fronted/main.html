@@ -23,11 +23,10 @@
       <a href="#">통계</a>
       <a href="#">BMI</a>
     </div>
-    <div>
+    <div style="display:flex; align-items:center; gap:8px;">
       <div class="avatar"></div>
-    <button onClick="Logout()" id="btn-logout">로그아웃</button>
+      <button id="btn-logout">로그아웃</button>
     </div>
-
   </nav>
 
   <main class="content">
@@ -45,16 +44,17 @@
           <div class="progress-ring">
             <svg viewBox="0 0 120 120">
               <circle cx="60" cy="60" r="52" />
+              <circle id="progressCircle" cx="60" cy="60" r="52" />
             </svg>
             <div class="ring-text">
-              <p class="num"></p>
-              <p class="sub">/ kcal</p>
+              <p class="num">0</p>
+              <p class="sub"></p>
             </div>
           </div>
           <div class="cal-info">
             <p class="label">오늘 남은 칼로리</p>
             <div class="big-number">
-              <span class="num">2,200</span>
+              <span class="num">0</span>
               <span class="unit">kcal</span>
             </div>
             <div class="goal-row">
