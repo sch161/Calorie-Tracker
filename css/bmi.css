@@ -1,0 +1,156 @@
+/* BMI 페이지 전용 스타일
+   nav, .card, .card-title, .btn-calc, .bmi-bar, .bmi-bar-wrap 은 main.css 것을 그대로 씀 */
+
+/* 페이지 배경: Figma대로 베이지 (main.css의 .content 흰 배경 덮어쓰기) */
+.bmi-content {
+  background: transparent;
+}
+
+/* 제목 */
+.bmi-title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.bmi-title .title {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.bmi-title .sub {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* 카드 2개 나란히 */
+.bmi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.input-card,
+.result-card {
+  margin: 0;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 입력 필드 */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.field-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+.field input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  font: inherit;
+  font-size: 14px;
+  color: var(--text-primary);
+  outline: none;
+}
+.field input::placeholder {
+  color: var(--text-muted);
+}
+.field input:focus {
+  border-color: var(--primary-500);
+}
+.field input.is-error {
+  border-color: var(--bmi-5);
+}
+
+/* 결과 숫자 + 상태 배지 (색은 아래 단계별 변수로 바뀜) */
+.big-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding-top: 12px;
+}
+.bmi-value {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 1.1;
+  letter-spacing: -0.96px;
+  color: var(--level-color, var(--text-muted));
+}
+.status-pill {
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--level-color, var(--text-muted));
+  background: var(--level-bg, var(--bg-base));
+}
+
+/* 단계별 색 (level-2 정상이 Figma 디자인 색) */
+.level-1 { --level-color: #6f9e6f; --level-bg: #eef5ee; }
+.level-2 { --level-color: var(--primary-500); --level-bg: var(--primary-050); }
+.level-3 { --level-color: #b8902f; --level-bg: #fbf3df; }
+.level-4 { --level-color: #c97a2e; --level-bg: #fbeadb; }
+.level-5 { --level-color: #c0533f; --level-bg: #f8e3df; }
+
+/* 막대: Figma BMI 화면처럼 5칸 같은 너비 (main.css의 3:4:2:5:5 비율 덮어쓰기) */
+.result-card .bmi-bar span {
+  flex: 1;
+}
+.bar-track {
+  position: relative; /* 마커 기준점 */
+}
+.bmi-marker {
+  position: absolute;
+  top: -3px;
+  width: 3px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--text-primary);
+  transform: translateX(-50%);
+  display: none;
+  transition: left 0.4s ease;
+}
+.bmi-marker.is-visible {
+  display: block;
+}
+
+/* 눈금: 칸 경계(20/40/60/80%)에 숫자 배치 */
+.bmi-scale {
+  position: relative;
+  height: 16px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.bmi-scale span {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+}
+.bmi-scale span:last-child {
+  right: 0;
+  transform: none;
+}
+
+/* 아래 설명 */
+.bmi-desc {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* 좁은 화면에서는 카드 세로로 */
+@media (max-width: 768px) {
+  .bmi-grid {
+    grid-template-columns: 1fr;
+  }
+}
