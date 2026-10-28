@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BMI 계산 | 칼로리 트래커</title>
+  <link rel="stylesheet" href="../css/common.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/bmi.css" />
+</head>
+
+<body>
+
+  <!-- ① 상단 네비게이션 (main.html과 같은 구조, BMI 메뉴만 active) -->
+  <nav class="nav-header">
+    <div class="brand">
+      <div class="brand-logo">
+        <img src="../images/logo.png" alt="로고" />
+      </div>
+      <p class="brand-name">칼로리 트래커</p>
+    </div>
+    <div class="nav-items">
+      <a href="./main.html">홈</a>
+      <a href="#">통계</a>
+      <a href="./bmi.html" class="active">BMI</a>
+    </div>
+    <div style="display:flex; align-items:center; gap:8px;">
+      <div class="avatar"></div>
+      <button id="btn-logout">로그아웃</button>
+    </div>
+  </nav>
+
+  <main class="content bmi-content">
+    <!-- ② 페이지 제목 -->
+    <div class="bmi-title">
+      <h1 class="title">BMI 계산</h1>
+      <p class="sub">키와 몸무게로 체질량 지수를 확인해요</p>
+    </div>
+
+    <div class="bmi-grid">
+      <!-- ③ 왼쪽: 정보 입력 카드 (form이라 Enter 키로도 계산됨) -->
+      <form class="card input-card" id="bmiForm" novalidate>
+        <p class="card-title">정보 입력</p>
+
+        <label class="field">
+          <span class="field-label">키 (cm)</span>
+          <input id="heightInput" type="number" step="0.1" inputmode="decimal" placeholder="175" />
+        </label>
+
+        <label class="field">
+          <span class="field-label">몸무게 (kg)</span>
+          <input id="weightInput" type="number" step="0.1" inputmode="decimal" placeholder="68" />
+        </label>
+
+        <button type="submit" class="btn-calc">계산하기</button>
+      </form>
+
+      <!-- ④ 오른쪽: 결과 카드 -->
+      <section class="card result-card" id="resultCard">
+        <p class="card-title">결과</p>
+
+        <!-- BMI 숫자 + 상태 배지 -->
+        <div class="big-result">
+          <p class="bmi-value" id="bmiValue">-</p>
+          <span class="status-pill" id="bmiStatus">계산 전</span>
+        </div>
+
+        <!-- 5칸 색 막대 + 내 위치 표시(마커) + 눈금 -->
+        <div class="bmi-bar-wrap">
+          <div class="bar-track">
+            <div class="bmi-bar">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <i class="bmi-marker" id="bmiMarker"></i>
+          </div>
+          <div class="bmi-scale">
+            <span style="left:20%">18.5</span>
+            <span style="left:40%">23</span>
+            <span style="left:60%">25</span>
+            <span style="left:80%">30</span>
+            <span>35+</span>
+          </div>
+        </div>
+
+        <p class="bmi-desc">정상 (18.5–22.9) · 과체중 (23–24.9) · 비만 (25 이상)</p>
+      </section>
+    </div>
+  </main>
+
+  <script type="module" src="./bmi.js"></script>
+</body>
+
+</html>
