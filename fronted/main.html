@@ -19,7 +19,7 @@
       <div class="nav-items">
         <a href="#" class="active">홈</a>
         <a href="#">통계</a>
-        <a href="bmi.html">BMI</a>
+        <a href="./bmi.html">BMI</a>
       </div>
       <div style="display: flex; align-items: center; gap: 8px">
         <div class="avatar"></div>
@@ -93,10 +93,14 @@
               ><span>35+</span>
             </div>
           </div>
-          <button class="btn-calc">계산하기</button>
+          <button class="btn-calc" onclick="location.href = './bmi.html'">
+            계산하기
+          </button>
         </section>
       </div>
     </main>
+
     <script type="module" src="./main1.js"></script>
+    <script type="module" src="./bmi.js"></script>
   </body>
 </html>
