@@ -57,7 +57,23 @@
   font-weight: 500;
 }
 #btn-logout {
-  margin-left: 16px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+}
+#btn-logout:hover {
+  background: var(--primary-050);
+  border-color: var(--primary-500);
+  color: var(--primary-500);
 }
 
 /* content */
