@@ -1,3 +1,7 @@
+// 한국인 영양소 섭취기준으로 만든 칼로리 표
+// 다이어트 : 유지 - 500
+// 벌크업 : 유지 + 400
+
 export const calorieTable = {
     male: [
         { min: 1, max: 2, diet: 400, keep: 900, bulkUp: 1300 },
@@ -27,6 +31,7 @@ export const calorieTable = {
     ],
 };
 
+// 칼로리를 맞출 때 calorieTable과 함께 사용하는 함수
 export function getRecommendedKcal(age, genderCode, goalKey) {
     const genderTable = genderCode === 1 ? calorieTable.male : calorieTable.female;
     const bracket = genderTable.find((row) => age >= row.min && age <= row.max);
