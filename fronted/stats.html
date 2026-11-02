@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>식단 기록 - 칼로리 트래커</title>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/stats.css" />
+</head>
+
+<body class="stats-page">
+
+    <nav class="nav-header">
+        <div class="brand">
+            <div class="brand-logo">
+                <img src="../images/logo.png" alt="로고" />
+            </div>
+            <p class="brand-name">칼로리 트래커</p>
+        </div>
+        <div class="nav-items">
+            <a href="./main.html">홈</a>
+            <a href="./stats.html" class="active">통계</a>
+            <a href="./bmi.html">BMI</a>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+            <div class="avatar"></div>
+            <button id="btn-logout">로그아웃</button>
+        </div>
+    </nav>
+
+    <main class="content">
+        <div class="title-row">
+            <div>
+                <h1 class="title">지난 기록</h1>
+                <p class="range-label" id="rangeLabel"></p>
+            </div>
+            <div class="period-toggle">
+                <button class="period-btn active" data-mode="weekly">주간</button>
+                <button class="period-btn" data-mode="monthly">월간</button>
+            </div>
+        </div>
+
+        <div class="stat-grid">
+            <section class="card stat-card">
+                <p class="big" id="avgNum">0</p>
+                <p class="desc">평균 섭취 (kcal)</p>
+            </section>
+            <section class="card stat-card">
+                <p class="big"><span id="rateNum">0</span><small>%</small></p>
+                <p class="desc" id="rateDesc">목표 달성률</p>
+            </section>
+        </div>
+
+        <section class="card compare-card">
+            <p class="compare-title" id="compareTitle">이번 주 vs 지난 주</p>
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th id="thPrev">지난주</th>
+                        <th id="thCur">이번주</th>
+                    </tr>
+                </thead>
+                <tbody id="compareBody"></tbody>
+            </table>
+        </section>
+    </main>
+
+    <script type="module" src="./stats.js"></script>
+</body>
+
+</html>

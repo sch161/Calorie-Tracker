@@ -40,7 +40,7 @@ document.getElementById('signupbtn').addEventListener('click', async () => {
         return;
     }
 
-    // "직접설정" 아닌데 목표칼로리가 비어있는 건 정상 상황이라 별도로 체크
+    // "직접설정" 아닌데 목표칼로리가 비어있는 건 별도로 체크
     if (goal === 0 && !targetKcal) {
         alert('목표 칼로리를 입력해주세요.');
         return;
