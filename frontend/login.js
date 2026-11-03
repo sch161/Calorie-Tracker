@@ -1,5 +1,11 @@
 import { supabase } from "./main.js";
 
+// 이미 로그인 했다면 index.html로 이동
+const { data: { session } } = await supabase.auth.getSession();
+if (session) {
+    location.replace('index.html');
+}
+
 // 로그인 버튼 클릭 시 id, pw를 가져옴
 document.getElementById('loginbtn').addEventListener('click', async () => {
     const logInId = document.getElementById('login_id').value.trim();

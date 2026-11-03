@@ -1,6 +1,12 @@
 import { supabase } from './main.js';
 import { FOOD_API_KEY } from './config.js';
 
+// 로그인을 한 세션이 없다면 login.html로 이동
+const { data: { session } } = await supabase.auth.getSession();
+if (!session) {
+    location.replace('login.html');
+}
+
 // 초기 변수
 let user = null;
 let profile = null;
