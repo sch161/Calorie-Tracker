@@ -25,5 +25,5 @@ document.getElementById('loginbtn').addEventListener('click', async () => {
         return;
     }
 
-    window.location.href = './main.html';
+    window.location.href = './index.html';
 });
