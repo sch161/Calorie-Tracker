@@ -1,13 +1,17 @@
 import { supabase } from './main.js';
 
 // 초기 변수
+
+// init에서 값 채움
 let user = null;
 let profile = null;
+
+// 주간 / 월간 버튼을 누르면 값이 바뀜
 let mode = 'weekly'; // 'weekly' | 'monthly'
 
 const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
 
-// Date → 'YYYY-MM-DD' (내 컴퓨터 시간 기준)
+// Date → 'YYYY-MM-DD' - DB의 log_date가 이 모양이라서, 같은 모양으로 맞춰야 비교할 수 있기 때문
 function toDateString(date) {
     const y = date.getFullYear();
     const m = String(date.getMonth() + 1).padStart(2, '0');
@@ -15,24 +19,26 @@ function toDateString(date) {
     return `${y}-${m}-${d}`;
 }
 
-// 'YYYY-MM-DD' → Date (new Date('2026-11-02')는 UTC로 해석돼서 쓰지 않음)
+// 'YYYY-MM-DD' → Date (new Date('2026-11-02')는 UTC 시차 때문에 하루가 밀릴 수 있어서 쓰지 않음)
 function parseDate(str) {
     const [y, m, d] = str.split('-').map(Number);
     return new Date(y, m - 1, d);
 }
 
-// date 기준 n일 뒤 (음수면 n일 전)
+// date 기준 n일 뒤 (음수면 n일 전) 날짜를 구함
 function addDays(date, n) {
-    const result = new Date(date);
+    const result = new Date(date); // 원본 date 가 바뀌면 안 되기 때문에 다른 변수에 복사본을 만듦
     result.setDate(result.getDate() + n);
     return result;
 }
 
+// 목표 달성 성공 여부
 // 목표 달성 기준: 기록이 있는 날 중 목표 칼로리 이하로 먹은 날
 const isAchieved = (total) => total <= profile.target_kcal;
 
 async function init() {
     // 로그인 확인
+    // supabase 내장 함수 getUser
     const { data: { user: loggedInUser } } = await supabase.auth.getUser();
     user = loggedInUser;
 
@@ -48,12 +54,16 @@ async function init() {
         .eq('user_id', user.id)
         .single();
 
+    // 프로필 조회 실패 시
     if (error) {
         console.error('프로필 조회 실패:', error.message);
         return;
     }
+
+    // profile에 user 데이터 담기
     profile = data;
 
+    // index.html 화면 오른쪽 위에 사용자 이름을 넣음
     document.querySelector('.avatar').textContent = profile.name;
 
     await loadStats();
@@ -61,7 +71,8 @@ async function init() {
 
 init();
 
-// 로그아웃 버튼
+// 로그아웃 버튼 클릭 시
+// supabase 내장 함수 signOut 를 사용해 로그아웃 -> login.html로 이동
 document.getElementById('btn-logout').addEventListener('click', async () => {
     const { error } = await supabase.auth.signOut();
     if (error) { alert('로그아웃 실패: ' + error.message); return; }

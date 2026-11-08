@@ -1,6 +1,6 @@
 import { supabase } from "./main.js";
 
-// 이미 로그인 했다면 index.html로 이동
+// 이미 로그인한 적이 있다면 바로 index.html로 이동
 const { data: { session } } = await supabase.auth.getSession();
 if (session) {
     location.replace('index.html');
@@ -17,10 +17,11 @@ document.getElementById('loginbtn').addEventListener('click', async () => {
         return;
     }
 
-    // 이메일로 인증하기 때문에 id와 이메일을 연결해서 supabase한테 보냄
+    // 이메일로 supabase에 저장하기 때문에 id + @caloriapp.com 형식으로 supabase한테 보냄
     const email = `${logInId}@caloriapp.com`;
 
-    const { data, error } = await supabase.auth.signInWithPassword({
+    // supabase 내장 함수 signInWithPassword로 로그인 요청을 보냄
+    const { error } = await supabase.auth.signInWithPassword({
         email: email,
         password: login_pw,
     });
@@ -31,5 +32,6 @@ document.getElementById('loginbtn').addEventListener('click', async () => {
         return;
     }
 
+    // 
     window.location.href = './index.html';
 });

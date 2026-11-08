@@ -1,7 +1,8 @@
 import { supabase } from './main.js';
 import { getRecommendedKcal } from './calorieTable.js';
 
-const customCalorieBox = document.querySelector('.custom-calorie'); // 목표 - 직접설정
+// 목표 - 직접설정
+const customCalorieBox = document.querySelector('.custom-calorie');
 
 // 목표 라디오 바뀔 때 마다 직접설정 박스 보이기/숨기기
 document.querySelectorAll('input[name="goal"]').forEach((radio) => {
@@ -10,7 +11,7 @@ document.querySelectorAll('input[name="goal"]').forEach((radio) => {
     });
 });
 
-// 라디오 value(diet / keep / bulkUp / self) => DB 숫자 코드 변환
+// 라디오 value(diet / keep / bulkUp / self) => DB로 넘길 숫자 코드 변환
 const goalMap = {
     diet: 1,
     keep: 2,
@@ -33,14 +34,15 @@ document.getElementById('signupbtn').addEventListener('click', async () => {
     const targetKcal = parseInt(goalKcalRaw.replace(/,/g, '')); // "1,800" → 1800
 
     const gender = parseInt(genderInput.value); // "1"/"2" → 1/2
-    const goal = goalMap[goalInput.value]; // "diet" → 1 등
+    const goal = goalMap[goalInput.value]; // "diet" → 1
 
+    // 유효성 체크
     if (!name || !signupId || !password || !age) {
         alert('내용을 모두 입력해주세요.');
         return;
     }
 
-    // "직접설정" 아닌데 목표칼로리가 비어있는 건 별도로 체크
+    // "직접설정" 아닌데 목표칼로리가 비어있는 건 별도로 다시 유효성 체크
     if (goal === 0 && !targetKcal) {
         alert('목표 칼로리를 입력해주세요.');
         return;
@@ -49,7 +51,7 @@ document.getElementById('signupbtn').addEventListener('click', async () => {
     // supabase에서 아이디만 등록이 불가능해서 가짜 이메일로 변환 후 저장
     const fakeEmail = `${signupId}@caloriapp.com`;
 
-    // Supabase Auth 계정 생성
+    // Supabase 내장 함수 signUp 으로 Auth 계정 생성
     const { data, error } = await supabase.auth.signUp({
         email: fakeEmail,
         password: password,
@@ -61,7 +63,7 @@ document.getElementById('signupbtn').addEventListener('click', async () => {
         return;
     }
 
-    // 하루 kcal 권장량 계산
+    // 하루 kcal 권장량 계산 - calorieTable의 getRecommendedKcal 함수 사용
     const finalKcal = goal === 0 ? targetKcal : getRecommendedKcal(age, gender, goalInput.value);
 
     // users 테이블에 프로필 정보 저장
