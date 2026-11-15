@@ -6,6 +6,8 @@ const customCalorieBox = document.querySelector('.custom-calorie');
 
 // 목표 라디오 바뀔 때 마다 직접설정 박스 보이기/숨기기
 document.querySelectorAll('input[name="goal"]').forEach((radio) => {
+    // 라디오 버튼이 바뀔 떄 마다 radio 버튼의 값이 self인지 아닌지 판단
+    // -> self가 아니면 none으로 가림 || self면 block으로 표시
     radio.addEventListener('change', () => {
         customCalorieBox.style.display = radio.value === 'self' ? 'block' : 'none';
     });
